@@ -16,7 +16,7 @@
     <TextView        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:textColor="@color/black"
+        android:textColor="@color/design_default_color_on_primary"
         android:gravity="center"
         android:layout_marginTop="16dp"
         android:text="Nombre"
