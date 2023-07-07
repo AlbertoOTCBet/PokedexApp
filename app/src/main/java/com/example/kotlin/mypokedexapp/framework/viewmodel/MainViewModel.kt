@@ -13,29 +13,5 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel:ViewModel() {
-    val pokedexObjectLiveData = MutableLiveData<PokedexObject?>()
-    private val pokemonListRequirement = PokemonListRequirement()
-
-    /*fun getPokemonList(){
-
-        viewModelScope.launch (Dispatchers.IO) {
-            val pokemonRepository = PokemonRepository()
-            val result: PokedexObject? = pokemonRepository.getPokemonList(Constants.MAX_POKEMON_NUMBER)
-            Log.d("Salida", result?.count.toString())
-            CoroutineScope(Dispatchers.Main).launch {
-                pokedexObjectLiveData.postValue(result)
-            }
-        }
-    }*/
-
-    fun getPokemonList(){
-        viewModelScope.launch(Dispatchers.IO) {
-            val result: PokedexObject? = pokemonListRequirement(Constants.MAX_POKEMON_NUMBER)
-            Log.d("Salida", result?.count.toString())
-            CoroutineScope(Dispatchers.Main).launch {
-                pokedexObjectLiveData.postValue(result)
-            }
-        }
-    }
 
 }
