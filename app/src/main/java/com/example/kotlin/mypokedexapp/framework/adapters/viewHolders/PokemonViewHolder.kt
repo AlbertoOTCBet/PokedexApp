@@ -1,6 +1,7 @@
 package com.example.kotlin.mypokedexapp.framework.adapters.viewHolders
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,8 @@ import com.example.kotlin.mypokedexapp.databinding.ActivityMainBinding
 import com.example.kotlin.mypokedexapp.databinding.InfoActivityBinding
 import com.example.kotlin.mypokedexapp.databinding.ItemPokemonBinding
 import com.example.kotlin.mypokedexapp.domain.PokemonInfoRequirement
+import com.example.kotlin.mypokedexapp.framework.views.activities.PokemonDetailActivity
+import com.example.kotlin.mypokedexapp.utils.Constants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,9 +28,9 @@ class PokemonViewHolder(private val binding: ItemPokemonBinding) : RecyclerView.
     fun bind(item: PokemonBase, context:Context){
         binding.TVName.text = item.name
         getPokemonInfo(item.url,binding.IVPhoto,context)
-        binding.IVPhoto.setOnClickListener {
-            //bindingInfo = InfoActivityBinding.inflate(LayoutInflater.from(R.layout.info_activity))
+        binding.llPokemo.setOnClickListener {
 
+            passViewGoToPokemonDetail(item.url,context)
         }
     }
 
@@ -55,6 +58,13 @@ class PokemonViewHolder(private val binding: ItemPokemonBinding) : RecyclerView.
                     .into(imageView)
             }
         }
+    }
+
+    private fun passViewGoToPokemonDetail(url: String,context:Context){
+        var intent: Intent = Intent(context, PokemonDetailActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        intent.putExtra(Constants.URL_POKEMON,url)
+        context.startActivity(intent)
     }
 
 }
